@@ -116,7 +116,7 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-    post:
+    put:
       tags:
         - blacklists
       operationId: updateBlacklist
@@ -245,7 +245,7 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-    post:
+    put:
       tags:
         - whitelists
       operationId: updateWhitelist
@@ -371,6 +371,46 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+    put:
+      tags:
+        - categories
+      operationId: updateCategory
+      description: Update a category
+      parameters:
+        - $ref: '#/components/parameters/uniqid'
+      requestBody:
+        description: category JSON to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+              properties:
+                title:
+                  type: string
+                  example: Software
+                unlisted:
+                  type: boolean
+                  example: false
+                products_bound:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "sample8718521" ]
+                sort_priority:
+                  type: integer
+                  example: 0
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
   /coupons:
     get:
       tags:
@@ -474,7 +514,7 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
-    post:
+    put:
       tags:
         - coupons
       operationId: updateCoupon
@@ -794,6 +834,141 @@ paths:
       description: Delete a product.
       parameters:
         - $ref: '#/components/parameters/uniqid'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - products
+      operationId: updateProduct
+      description: Update a product
+      parameters:
+        - $ref: '#/components/parameters/uniqid'
+      requestBody:
+        description: product JSON to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - price
+                - description
+                - type
+              properties:
+                title:
+                  type: string
+                  example: Software Activation Keys
+                price:
+                  type: number
+                  format: double
+                  example: 12.50
+                description:
+                  type: string
+                  example: Product description example.
+                currency:
+                  $ref: '#/components/schemas/currency'
+                gateways:
+                  $ref: '#/components/schemas/gateways'
+                type:
+                  type: string
+                  example: SERIALS
+                serials:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "activation-key-#1" ]
+                serials_remove_duplicates:
+                  type: boolean
+                  example: true
+                service_text:
+                  type: string
+                  example: null
+                stock:
+                  type: integer
+                  example: null
+                dynamic_webhook:
+                  type: string
+                  example: null
+                stock_delimiter:
+                  type: string
+                  example: ","
+                min_quantity:
+                  type: integer
+                  example: 1
+                max_quantity:
+                  type: integer
+                  example: 150
+                delivery_text:
+                  type: string
+                  example: Thank you for the purchase!
+                custom_fields:
+                  type: array
+                  items:
+                    type: object
+                  example: null
+                crypto_confirmations_needed:
+                  type: integer
+                  example: 3
+                max_risk_level:
+                  type: integer
+                  example: 85
+                unlisted:
+                  type: boolean
+                  example: false
+                private:
+                  type: boolean
+                  example: false
+                block_vpn_proxies:
+                  type: boolean
+                  example: true
+                sort_priority:
+                  type: integer
+                  example: 0
+                webhooks:
+                  type: array
+                  items:
+                    type: string
+                  example: null
+                on_hold:
+                  type: boolean
+                  example: false
+                terms_of_service:
+                  type: string
+                  example: ToS to be agreed upon purchase.
+                warranty:
+                  type: integer
+                  example: 86400
+                warranty_text:
+                  type: string
+                  example: Warranty description.
+                remove_image:
+                  type: boolean
+                  example: false
+                remove_file:
+                  type: boolean
+                  example: false
+                volume_discounts:
+                  type: array
+                  items:
+                    type: object
+                  example: null
+                recurring_interval:
+                  type: string
+                  example: null
+                recurring_interval_count:
+                  type: integer
+                  example: null
+                trial_period:
+                  type: integer
+                  example: null   
       responses:
         '200':
           $ref: '#/components/responses/200'
