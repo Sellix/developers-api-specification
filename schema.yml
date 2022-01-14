@@ -472,6 +472,9 @@ paths:
                 disabled_with_volume_discounts:
                   type: boolean
                   example: true
+                all_recurring_bill_invoices:
+                  type: boolean
+                  example: false
       responses:
         '200':
           $ref: '#/components/responses/200'
