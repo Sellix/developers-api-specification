@@ -7,9 +7,9 @@ info:
   version: 1.0.0
   title: Sellix Developers API
   x-logo:
-    - url: https://cdn.sellix.io/static/logo/main-black.png
-      backgroundColor: "#FFFFFF"
-      altText: Sellix logo
+    url: https://cdn.sellix.io/static/logo/main-black.png
+    backgroundColor: "#FFFFFF"
+    altText: Sellix logo
 tags:
   - name: blacklists
     description: Blacklist endpoints
