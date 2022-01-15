@@ -12,30 +12,34 @@ info:
     altText: Sellix logo
     href: https://sellix.io
 tags:
-  - name: blacklists
+  - name: Blacklists
     description: Blacklist endpoints
-  - name: whitelists
+  - name: Whitelists
     description: Whitelist endpoints
-  - name: categories
+  - name: Categories
     description: Category endpoints
-  - name: coupons
+  - name: Coupons
     description: Coupon endpoints
-  - name: feedback
+  - name: Feedback
     description: Feedback endpoints
-  - name: orders
+  - name: Orders
     description: Order endpoints (also known as invoices)
-  - name: products
+  - name: Products
     description: Product endpoints
-  - name: queries
+  - name: Queries
     description: Query endpoints
-  - name: payments
+  - name: Payments
     description: Payment endpoints
+  - name: Customers
+    description: Customer endpoints
+  - name: Subscriptions
+    description: Subscription endpoints
 
 paths:
   /blacklists:
     get:
       tags:
-        - blacklists
+        - Blacklists
       operationId: getBlacklists
       description: List all the blacklists created on the current shop.
       responses:
@@ -49,7 +53,7 @@ paths:
           $ref: '#/components/responses/404'
     post:
       tags:
-        - blacklists
+        - Blacklists
       operationId: createBlacklist
       description: Create a blacklist
       requestBody:
@@ -91,7 +95,7 @@ paths:
   /blacklists/{uniqid}:
     get:
       tags:
-        - blacklists
+        - Blacklists
       operationId: getBlacklist
       description: Get a specific blacklist.
       parameters:
@@ -107,7 +111,7 @@ paths:
           $ref: '#/components/responses/404'
     delete:
       tags:
-        - blacklists
+        - Blacklists
       operationId: deleteBlacklist
       description: Delete a blacklist.
       parameters:
@@ -123,7 +127,7 @@ paths:
           $ref: '#/components/responses/404'
     put:
       tags:
-        - blacklists
+        - Blacklists
       operationId: updateBlacklist
       description: Update a blacklist
       parameters:
@@ -164,7 +168,7 @@ paths:
   /whitelists:
     get:
       tags:
-        - whitelists
+        - Whitelists
       operationId: getWhitelists
       description: List all the whitelists created on the current shop.
       responses:
@@ -178,7 +182,7 @@ paths:
           $ref: '#/components/responses/404'
     post:
       tags:
-        - whitelists
+        - Whitelists
       operationId: createWhitelist
       description: Create a whitelist
       requestBody:
@@ -220,7 +224,7 @@ paths:
   /whitelists/{uniqid}:
     get:
       tags:
-        - whitelists
+        - Whitelists
       operationId: getWhitelist
       description: Get a specific whitelist.
       parameters:
@@ -236,7 +240,7 @@ paths:
           $ref: '#/components/responses/404'
     delete:
       tags:
-        - whitelists
+        - Whitelists
       operationId: deleteWhitelist
       description: Delete a whitelist.
       parameters:
@@ -252,7 +256,7 @@ paths:
           $ref: '#/components/responses/404'
     put:
       tags:
-        - whitelists
+        - Whitelists
       operationId: updateWhitelist
       description: Update a whitelist
       parameters:
@@ -293,7 +297,7 @@ paths:
   /categories:
     get:
       tags:
-        - categories
+        - Categories
       operationId: getCategories
       description: List all the categories created on the current shop.
       responses:
@@ -307,7 +311,7 @@ paths:
           $ref: '#/components/responses/404'
     post:
       tags:
-        - categories
+        - Categories
       operationId: createCategory
       description: Create a category
       requestBody:
@@ -346,7 +350,7 @@ paths:
   /categories/{uniqid}:
     get:
       tags:
-        - categories
+        - Categories
       operationId: getCategory
       description: Get a specific category.
       parameters:
@@ -362,7 +366,7 @@ paths:
           $ref: '#/components/responses/404'
     delete:
       tags:
-        - categories
+        - Categories
       operationId: deleteCategory
       description: Delete a category.
       parameters:
@@ -378,7 +382,7 @@ paths:
           $ref: '#/components/responses/404'
     put:
       tags:
-        - categories
+        - Categories
       operationId: updateCategory
       description: Update a category
       parameters:
@@ -419,7 +423,7 @@ paths:
   /coupons:
     get:
       tags:
-        - coupons
+        - Coupons
       operationId: getCoupons
       description: List all the coupons created on the current shop.
       responses:
@@ -433,7 +437,7 @@ paths:
           $ref: '#/components/responses/404'
     post:
       tags:
-        - coupons
+        - Coupons
       operationId: createCoupon
       description: Create a coupon
       requestBody:
@@ -492,7 +496,7 @@ paths:
   /coupons/{uniqid}:
     get:
       tags:
-        - coupons
+        - Coupons
       operationId: getCoupon
       description: Get a specific coupon.
       parameters:
@@ -508,7 +512,7 @@ paths:
           $ref: '#/components/responses/404'
     delete:
       tags:
-        - coupons
+        - Coupons
       operationId: deleteCoupon
       description: Delete a coupon.
       parameters:
@@ -524,7 +528,7 @@ paths:
           $ref: '#/components/responses/404'
     put:
       tags:
-        - coupons
+        - Coupons
       operationId: updateCoupon
       description: Update a coupon
       requestBody:
@@ -579,7 +583,7 @@ paths:
   /feedback:
     get:
       tags:
-        - feedback
+        - Feedback
       operationId: feedbackListing
       description: List the feedback received on the current shop.
       responses:
@@ -594,7 +598,7 @@ paths:
   /feedback/{uniqid}:
     get:
       tags:
-        - feedback
+        - Feedback
       operationId: getFeedback
       description: Get a specific feedback.
       parameters:
@@ -611,7 +615,7 @@ paths:
   /feedback/reply/{uniqid}:
     post:
       tags:
-        - feedback
+        - Feedback
       operationId: replyFeedback
       description: Reply to a feedback
       requestBody:
@@ -641,7 +645,7 @@ paths:
   /orders:
     get:
       tags:
-        - orders
+        - Orders
       operationId: getOrders
       description: List all the orders created on the current shop.
       responses:
@@ -656,7 +660,7 @@ paths:
   /orders/{uniqid}:
     get:
       tags:
-        - orders
+        - Orders
       operationId: getOrder
       description: Get a specific order.
       parameters:
@@ -673,7 +677,7 @@ paths:
   /products:
     get:
       tags:
-        - products
+        - Products
       operationId: getProducts
       description: List all the products created on the current shop.
       responses:
@@ -687,7 +691,7 @@ paths:
           $ref: '#/components/responses/404'
     post:
       tags:
-        - products
+        - Products
       operationId: createProduct
       description: Create a product
       requestBody:
@@ -821,8 +825,8 @@ paths:
   /products/{uniqid}:
     get:
       tags:
-        - products
-      operationId: getProdut
+        - Products
+      operationId: getProduct
       description: Get a specific product.
       parameters:
         - $ref: '#/components/parameters/uniqid'
@@ -837,7 +841,7 @@ paths:
           $ref: '#/components/responses/404'
     delete:
       tags:
-        - products
+        - Products
       operationId: deleteProduct
       description: Delete a product.
       parameters:
@@ -853,7 +857,7 @@ paths:
           $ref: '#/components/responses/404'
     put:
       tags:
-        - products
+        - Products
       operationId: updateProduct
       description: Update a product
       parameters:
@@ -989,7 +993,7 @@ paths:
   /queries:
     get:
       tags:
-        - queries
+        - Queries
       operationId: getQueries
       description: List all the queries created on the current shop.
       responses:
@@ -1004,7 +1008,7 @@ paths:
   /queries/{uniqid}:
     get:
       tags:
-        - queries
+        - Queries
       operationId: getQuery
       description: Get a specific query.
       parameters:
@@ -1021,7 +1025,7 @@ paths:
   /queries/reply/{uniqid}:
     post:
       tags:
-        - queries
+        - Queries
       operationId: replyQuery
       description: Add a reply to a query.
       parameters:
@@ -1038,7 +1042,7 @@ paths:
   /queries/close/{uniqid}:
     post:
       tags:
-        - queries
+        - Queries
       operationId: closeQuery
       description: Close a query.
       parameters:
@@ -1055,7 +1059,7 @@ paths:
   /queries/reopen/{uniqid}:
     post:
       tags:
-        - queries
+        - Queries
       operationId: reopenQuery
       description: Reopen a closed query.
       parameters:
@@ -1072,7 +1076,7 @@ paths:
   /payments:
     post:
       tags:
-        - payments
+        - Payments
       operationId: createPayment
       description: Create a payment
       requestBody:
@@ -1097,7 +1101,7 @@ paths:
                 cart:
                   type: object
                   required:
-                    - products
+                    - Products
                   properties:
                     products:
                       type: array
@@ -1271,11 +1275,181 @@ paths:
   /payments/{uniqid}:
     delete:
       tags:
-        - payments
+        - Payments
       operationId: voidPayment
       description: Void a payment.
       parameters:
         - $ref: '#/components/parameters/uniqid'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+  /customers:
+    get:
+      tags:
+        - Customers
+      operationId: getCustomers
+      description: List all the customers created on the current shop.
+      responses:
+        '200':
+          $ref: '#/components/responses/customers'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+        - Customers
+      operationId: createCustomer
+      description: Create a customer
+      requestBody:
+        description: customer JSON to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - name
+                - surname
+              properties:
+                email:
+                  type: string
+                  example: sample@gmail.com
+                  description: Customer email
+                name:
+                  type: string
+                  example: James
+                  description: Customer name
+                surname:
+                  type: string
+                  example: Smith
+                  description: Customer surname
+                phone:
+                  type: string
+                  example: 3287261000
+                  description: Customer phone
+                phone_country_code:
+                  type: string
+                  example: IT
+                  description: Customer phone country code
+                country_code:
+                  type: string
+                  example: IT
+                  description: Customer country code
+                street_address:
+                  type: string
+                  example: St. Rome 404
+                  description: Customer street address
+                additional_address_info:
+                  type: string
+                  example: null
+                  description: Customer street address additional info
+                city:
+                  type: string
+                  example: Rome
+                  description: Customer city
+                postal_code:
+                  type: string
+                  example: 00000
+                  description: Customer postal code
+                state:
+                  type: string
+                  example: Italy
+                  description: Customer state
+      responses:
+        '200':
+          $ref: '#/components/responses/customerCreated'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+  /customers/{id}:
+    get:
+      tags:
+        - Customers
+      operationId: getCustomer
+      description: Get a specific product.
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/customer'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Customers
+      operationId: updateCustomer
+      description: Update a customer
+      parameters:
+        - $ref: '#/components/parameters/id'
+      requestBody:
+        description: customer JSON to be updated
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: sample@gmail.com
+                  description: Customer email
+                name:
+                  type: string
+                  example: James
+                  description: Customer name
+                surname:
+                  type: string
+                  example: Smith
+                  description: Customer surname
+                phone:
+                  type: string
+                  example: 3287261000
+                  description: Customer phone
+                phone_country_code:
+                  type: string
+                  example: IT
+                  description: Customer phone country code
+                country_code:
+                  type: string
+                  example: IT
+                  description: Customer country code
+                street_address:
+                  type: string
+                  example: St. Rome 404
+                  description: Customer street address
+                additional_address_info:
+                  type: string
+                  example: null
+                  description: Customer street address additional info
+                city:
+                  type: string
+                  example: Rome
+                  description: Customer city
+                postal_code:
+                  type: string
+                  example: 00000
+                  description: Customer postal code
+                state:
+                  type: string
+                  example: Italy
+                  description: Customer state
       responses:
         '200':
           $ref: '#/components/responses/200'
@@ -1957,6 +2131,57 @@ components:
           format: timestamp
           example: 0
           description: User ID, available if the product has been edited.
+    customer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: cst_8761b2g7atm91892
+          description: Customer ID
+        email:
+          type: string
+          example: sample@gmail.com
+          description: Customer email
+        name:
+          type: string
+          example: James
+          description: Customer name
+        surname:
+          type: string
+          example: Smith
+          description: Customer surname
+        phone:
+          type: string
+          example: 3287261000
+          description: Customer phone
+        phone_country_code:
+          type: string
+          example: IT
+          description: Customer phone country code
+        country_code:
+          type: string
+          example: IT
+          description: Customer country code
+        street_address:
+          type: string
+          example: St. Rome 404
+          description: Customer street address
+        additional_address_info:
+          type: string
+          example: null
+          description: Customer street address additional info
+        city:
+          type: string
+          example: Rome
+          description: Customer city
+        postal_code:
+          type: string
+          example: 00000
+          description: Customer postal code
+        state:
+          type: string
+          example: Italy
+          description: Customer state
     invoice:
       type: object
       properties:
@@ -3099,7 +3324,7 @@ components:
             - product:dynamic
             - query:created
             - query:replied
-            - feedback:received
+            - Feedback:received
             - order:partial:product
             - order:created:product
             - order:disputed:product
@@ -3547,6 +3772,14 @@ components:
       required: true
       example: "sample29a0e39d"
       description: Uniqid of the resource
+    id:
+      in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      example: "sample6978a0e39d"
+      description: ID of the resource
   responses:
     blacklistListing:
       description: resource retrieved
@@ -4004,6 +4237,120 @@ components:
             oneOf:
               - $ref: '#/components/schemas/payment_response'
               - $ref: '#/components/schemas/payment_response_white_label'
+    customerListing:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/customer'
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
+    customer:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  customer:
+                    $ref: '#/components/schemas/customer'
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
+    customerCreated:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  customer_id:
+                    type: string
+                    example: cus_87b8as6ba9125
+                    description: Customer ID
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
+    customers:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  customers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/customer'
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
     200:
       description: the request has succeeded
       content:
