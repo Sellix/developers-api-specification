@@ -15,9 +15,12 @@ jobs:
       - name: Install redoc
         run: npm i -g redoc-cli
       - name: Build Static Api Spec
-        run: redoc-cli bundle schema.yml
+        run: |
+          mkdir output
+          redoc-cli bundle schema.yml
+          mv redoc-static.html output/index.html
       - name: Deploy Github Pages
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages
-          folder: .
+          folder: output
