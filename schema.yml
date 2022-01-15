@@ -3591,9 +3591,7 @@ components:
                 type: object
                 properties:
                   blacklist:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/blacklist'
+                    $ref: '#/components/schemas/blacklist'
               message:
                 type: string
                 example: null
@@ -3649,9 +3647,7 @@ components:
                 type: object
                 properties:
                   whitelist:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/whitelist'
+                    $ref: '#/components/schemas/whitelist'
               message:
                 type: string
                 example: null
@@ -3707,9 +3703,7 @@ components:
                 type: object
                 properties:
                   category:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/category'
+                    $ref: '#/components/schemas/category'
               message:
                 type: string
                 example: null
@@ -3765,9 +3759,7 @@ components:
                 type: object
                 properties:
                   coupon:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/coupon'
+                    $ref: '#/components/schemas/coupon'
               message:
                 type: string
                 example: null
@@ -3823,9 +3815,7 @@ components:
                 type: object
                 properties:
                   feedback:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/feedback'
+                    $ref: '#/components/schemas/feedback'
               message:
                 type: string
                 example: null
@@ -3881,9 +3871,7 @@ components:
                 type: object
                 properties:
                   order:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/invoice'
+                    $ref: '#/components/schemas/invoice'
               message:
                 type: string
                 example: null
@@ -3939,9 +3927,7 @@ components:
                 type: object
                 properties:
                   product:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/product'
+                    $ref: '#/components/schemas/product'
               message:
                 type: string
                 example: null
@@ -3997,9 +3983,7 @@ components:
                 type: object
                 properties:
                   query:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/query'
+                    $ref: '#/components/schemas/query'
               message:
                 type: string
                 example: null
