@@ -3969,7 +3969,7 @@ components:
             uniqid:
               type: string
               format: uuid
-              description: Unique ID of te invoice created for the payment.
+              description: Unique ID of the invoice created for the payment.
           example: {
             "url": "https://sellix.io/payment/sample-4caac117ca-abeb80",
             "uniqid": "sample-4caac117ca-abeb80"
@@ -4033,7 +4033,7 @@ components:
             uniqid:
               type: string
               format: uuid
-              description: Unique ID of te invoice created for the subscription.
+              description: Unique ID of the invoice created for the subscription.
           example: {
             "url": "https://sellix.io/payment/sample-4caac117ca-abeb80",
             "uniqid": "sample-4caac117ca-abeb80"
