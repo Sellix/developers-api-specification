@@ -1379,7 +1379,7 @@ paths:
       tags:
         - Customers
       operationId: getCustomer
-      description: Get a specific product.
+      description: Get a specific customer.
       parameters:
         - $ref: '#/components/parameters/id'
       responses:
@@ -1459,6 +1459,113 @@ paths:
           $ref: '#/components/responses/403'
         '404':
           $ref: '#/components/responses/404'
+  /subscriptions:
+    get:
+      tags:
+        - Subscriptions
+      operationId: getSubscriptions
+      description: List all the subscriptions created on the current shop.
+      responses:
+        '200':
+          $ref: '#/components/responses/subscriptions'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+        - Subscriptions
+      operationId: createSubscriptionToCustomer
+      description: Create a subscription invoice to a customer
+      requestBody:
+        description: subscription creation JSON
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - product_id
+                - customer_id
+              properties:
+                product_id:
+                  type: string
+                  description: ID of the subscription product.
+                  example: sample8de6277597
+                coupon_code:
+                  type: string
+                  description: Coupon code for this subscription.
+                  example: null
+                custom_fields:
+                  $ref: '#/components/schemas/custom_fields_object'
+                customer_id:
+                  type: string
+                  description: ID of the store customer.
+                  example: cst_sampleaddc898a645
+                gateway:
+                  type: string
+                  enum:
+                    - PAYPAL
+                    - ETHEREUM
+                    - BITCOIN
+                    - BITCOIN_CASH
+                    - LITECOIN
+                    - SKRILL
+                    - STRIPE
+                    - PERFECT_MONEY
+                    - CASH_APP
+                    - LEX_HOLDINGS_GROUP
+                    - PAYDASH
+                    - MONERO
+                    - NANO
+                    - SOLANA
+                    - RIPPLE
+                  example: null
+                  description: If null, the customer will be asked automatically to choose a gateway on the Sellix hosted /payment page.
+      responses:
+        '200':
+          $ref: '#/components/responses/subscriptionInvoiceCreated'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+  /subscriptions/{id}:
+    get:
+      tags:
+        - Subscriptions
+      operationId: getSubscription
+      description: Get a specific subscription.
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/subscription'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+        - Subscriptions
+      operationId: deleteSubscription
+      description: Cancel a subscription
+      parameters:
+        - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
 
 security:
   - bearerAuth: []
@@ -1524,7 +1631,6 @@ components:
           description: Date, available if the blacklist has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the blacklist has been edited.
     whitelist:
@@ -1574,7 +1680,6 @@ components:
           description: Date, available if the whitelist has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the whitelist has been edited.
     category:
@@ -1626,7 +1731,6 @@ components:
           description: Date, available if the category has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the category has been edited.
     coupon:
@@ -1711,7 +1815,6 @@ components:
           description: Date, available if the category has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the category has been edited.
     feedback:
@@ -1794,7 +1897,6 @@ components:
           description: Date, available if the product has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the product has been edited.
     feedbackListing:
@@ -1857,7 +1959,6 @@ components:
           description: Date, available if the product has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the product has been edited.
     product:
@@ -2128,7 +2229,6 @@ components:
           description: Date, available if the product has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the product has been edited.
     customer:
@@ -2182,6 +2282,302 @@ components:
           type: string
           example: Italy
           description: Customer state
+    subscription:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the subscription.
+          example: rec_sample-3afde4b6e1-82833e
+        shop_id:
+          type: integer
+          description: ID of the store for which this subscription has been created.
+          example: 124
+        product_id:
+          type: string
+          description: ID of the product subscription.
+          example: samplede6277597
+        status:
+          type: string
+          description: Subscription status.
+          enum:
+            - PENDING
+            - CANCELED
+            - TRIALING
+            - ACTIVE
+          example: CANCELED
+        gateway:
+          type: string
+          enum:
+            - PAYPAL
+            - ETHEREUM
+            - BITCOIN
+            - BITCOIN_CASH
+            - LITECOIN
+            - SKRILL
+            - STRIPE
+            - PERFECT_MONEY
+            - CASH_APP
+            - LEX_HOLDINGS_GROUP
+            - PAYDASH
+            - MONERO
+            - NANO
+            - SOLANA
+            - RIPPLE
+          example: STRIPE
+          description: Gateway chosen for this subscription. A new invoice monthly will be created using this gayeway.
+        custom_fields:
+          $ref: '#/components/schemas/custom_fields_object'
+        customer_id:
+          type: string
+          description: ID of the store's customer.
+          example: cst_sample6addc898a645
+        stripe_customer_id:
+          type: string
+          description: ID of the customer created on STRIPE.
+          example: cus_samplegIE0YKwapE6
+        stripe_account:
+          type: string
+          description: ID of the Stripe connected account.
+          example: acct_sampleuMKb2X7rAeMb
+        stripe_subscription_id:
+          type: string
+          description: ID of the Stripe subscription.
+          example: sub_samplexpKb2X7rAeMbKdJc78AP
+        coupon_id:
+          type: string
+          description: If a coupon has been applied, its ID.
+          example: null
+        current_period_end:
+          type: integer
+          format: timestamp
+          description: When the current billing period will end.
+          example: 1641313649
+        upcoming_email_1_week_sent:
+          type: boolean
+          description: Whether or not the email for an upcoming renewal has been sent.
+          example: false
+        trial_period_ending_email_sent:
+          type: boolean
+          description: Whether or not the email for the trial period expiring has been sent.
+          example: false
+        renewal_invoice_created:
+          type: boolean
+          description: If true, the renewal invoice has already been created.
+          example: false
+        created_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was created.
+          example: 1641314317
+        updated_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was last updated.
+          example: 1641315120
+        canceled_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was canceled.
+          example: null
+        product_title:
+          type: string
+          description: Digital Software
+          example: The title of the product for this subscription.
+        customer_name:
+          type: string
+          description: Customer name.
+          example: James
+        customer_surname:
+          type: string
+          description: Customer surname.
+          example: Smith
+        customer_phone:
+          type: string
+          description: Customer phone.
+          example: null
+        customer_phone_country_code:
+          type: string
+          description: Customer phone country code.
+          example: null
+        customer_country_code:
+          type: string
+          description: Customer country code.
+          example: null
+        customer_street_address:
+          type: string
+          description: Customer street address.
+          example: null
+        customer_additional_address_info:
+          type: string
+          description: Customer street address additional info.
+          example: null
+        customer_city:
+          type: string
+          description: Customer city.
+          example: null
+        customer_postal_code:
+          type: string
+          description: Customer postal code.
+          example: null
+        customer_state:
+          type: string
+          description: Customer state.
+          example: null
+        customer_email:
+          type: string
+          description: Customer email.
+          example: sample@gmail.com
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/invoiceListing'
+    subscriptionListing:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the subscription.
+          example: rec_sample-3afde4b6e1-82833e
+        shop_id:
+          type: integer
+          description: ID of the store for which this subscription has been created.
+          example: 124
+        product_id:
+          type: string
+          description: ID of the product subscription.
+          example: samplede6277597
+        status:
+          type: string
+          description: Subscription status.
+          enum:
+            - PENDING
+            - CANCELED
+            - TRIALING
+            - ACTIVE
+          example: CANCELED
+        gateway:
+          type: string
+          enum:
+            - PAYPAL
+            - ETHEREUM
+            - BITCOIN
+            - BITCOIN_CASH
+            - LITECOIN
+            - SKRILL
+            - STRIPE
+            - PERFECT_MONEY
+            - CASH_APP
+            - LEX_HOLDINGS_GROUP
+            - PAYDASH
+            - MONERO
+            - NANO
+            - SOLANA
+            - RIPPLE
+          example: STRIPE
+          description: Gateway chosen for this subscription. A new invoice monthly will be created using this gayeway.
+        custom_fields:
+          $ref: '#/components/schemas/custom_fields_object'
+        customer_id:
+          type: string
+          description: ID of the store's customer.
+          example: cst_sample6addc898a645
+        stripe_customer_id:
+          type: string
+          description: ID of the customer created on STRIPE.
+          example: cus_samplegIE0YKwapE6
+        stripe_account:
+          type: string
+          description: ID of the Stripe connected account.
+          example: acct_sampleuMKb2X7rAeMb
+        stripe_subscription_id:
+          type: string
+          description: ID of the Stripe subscription.
+          example: sub_samplexpKb2X7rAeMbKdJc78AP
+        coupon_id:
+          type: string
+          description: If a coupon has been applied, its ID.
+          example: null
+        current_period_end:
+          type: integer
+          format: timestamp
+          description: When the current billing period will end.
+          example: 1641313649
+        upcoming_email_1_week_sent:
+          type: boolean
+          description: Whether or not the email for an upcoming renewal has been sent.
+          example: false
+        trial_period_ending_email_sent:
+          type: boolean
+          description: Whether or not the email for the trial period expiring has been sent.
+          example: false
+        renewal_invoice_created:
+          type: boolean
+          description: If true, the renewal invoice has already been created.
+          example: false
+        created_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was created.
+          example: 1641314317
+        updated_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was last updated.
+          example: 1641315120
+        canceled_at:
+          type: integer
+          format: timestamp
+          description: When this subscription was canceled.
+          example: null
+        product_title:
+          type: string
+          description: Digital Software
+          example: The title of the product for this subscription.
+        customer_name:
+          type: string
+          description: Customer name.
+          example: James
+        customer_surname:
+          type: string
+          description: Customer surname.
+          example: Smith
+        customer_phone:
+          type: string
+          description: Customer phone.
+          example: null
+        customer_phone_country_code:
+          type: string
+          description: Customer phone country code.
+          example: null
+        customer_country_code:
+          type: string
+          description: Customer country code.
+          example: null
+        customer_street_address:
+          type: string
+          description: Customer street address.
+          example: null
+        customer_additional_address_info:
+          type: string
+          description: Customer street address additional info.
+          example: null
+        customer_city:
+          type: string
+          description: Customer city.
+          example: null
+        customer_postal_code:
+          type: string
+          description: Customer postal code.
+          example: null
+        customer_state:
+          type: string
+          description: Customer state.
+          example: null
+        customer_email:
+          type: string
+          description: Customer email.
+          example: sample@gmail.com
     invoice:
       type: object
       properties:
@@ -2697,7 +3093,6 @@ components:
           description: Date, available if the blacklist has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the blacklist has been edited.
     invoiceListing:
@@ -3064,7 +3459,6 @@ components:
           description: Date, available if the blacklist has been edited.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the blacklist has been edited.
     query:
@@ -3141,7 +3535,6 @@ components:
           description: Date, available if the query has been updated.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the query has been edited.
     queryListing:
@@ -3214,7 +3607,6 @@ components:
           description: Date, available if the query has been updated.
         updated_by:
           type: integer
-          format: timestamp
           example: 0
           description: User ID, available if the query has been edited.
     query_message:
@@ -3578,6 +3970,70 @@ components:
               type: string
               format: uuid
               description: Unique ID of te invoice created for the payment.
+          example: {
+            "url": "https://sellix.io/payment/sample-4caac117ca-abeb80",
+            "uniqid": "sample-4caac117ca-abeb80"
+          }
+        message:
+          type: string
+          example: the request has succeeded
+        log:
+          type: object
+          example: null
+        error:
+          type: string
+          example: null
+        env:
+          type: string
+          example: production
+    subscription_trial_response:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          type: object
+          required:
+            - invoice
+          properties:
+            subscription_id:
+              type: string
+              description: Subscription ID.
+          example: {
+            "subscription_id": "rec_sample-4caac117ca-abeb80"
+          }
+        message:
+          type: string
+          example: the request has succeeded
+        log:
+          type: object
+          example: null
+        error:
+          type: string
+          example: null
+        env:
+          type: string
+          example: production
+    subscription_invoice_response:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        data:
+          type: object
+          required:
+            - url
+            - uniqid
+          properties:
+            url:
+              type: string
+              description: Sellix hosted payment page.
+            uniqid:
+              type: string
+              format: uuid
+              description: Unique ID of te invoice created for the subscription.
           example: {
             "url": "https://sellix.io/payment/sample-4caac117ca-abeb80",
             "uniqid": "sample-4caac117ca-abeb80"
@@ -4339,6 +4795,70 @@ components:
                     type: array
                     items:
                       $ref: '#/components/schemas/customer'
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
+    subscription:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  subscription:
+                    $ref: '#/components/schemas/subscription'
+              message:
+                type: string
+                example: null
+              log:
+                type: object
+                example: null
+              error:
+                type: string
+                example: null
+              env:
+                type: string
+                example: production
+    subscriptionInvoiceCreated:
+      description: subscription creation response
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/subscription_trial_response'
+              - $ref: '#/components/schemas/subscription_invoice_response'
+    subscriptions:
+      description: resource retrieved
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: integer
+                example: 200
+              data:
+                type: object
+                properties:
+                  subscriptions:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/subscriptionListing'
               message:
                 type: string
                 example: null
