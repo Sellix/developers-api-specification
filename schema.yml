@@ -335,6 +335,11 @@ paths:
                   items:
                     type: string
                   example: [ "sample8718521" ]
+                groups_bound:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "5f42ada2b38a5" ]
                 sort_priority:
                   type: integer
                   example: 0
@@ -408,6 +413,11 @@ paths:
                   items:
                     type: string
                   example: [ "sample8718521" ]
+                groups_bound:
+                  type: array
+                  items:
+                    type: string
+                  example: [ "5f42ada2b38a5" ]
                 sort_priority:
                   type: integer
                   example: 0
@@ -1719,6 +1729,15 @@ components:
           type: integer
           example: 1
           description: How many products are present in the products_bound array
+        groups_bound:
+          type: array
+          items:
+            $ref: '#/components/schemas/group'
+          description: Array of groups.
+        groups_count:
+          type: integer
+          example: 1
+          description: How many groups are present in the groups_bound array
         created_at:
           type: integer
           format: timestamp
@@ -1733,6 +1752,33 @@ components:
           type: integer
           example: 0
           description: User ID, available if the category has been edited.
+    group:
+      type: object
+      properties:
+        uniqid:
+          type: string
+          format: uuid
+          example: "sample29a0e39d"
+          description: Unique ID of the resource, used as reference across the API.
+        title:
+          type: string
+          example: Digital goods to download
+          description: Group title.
+        image_attachment:
+          type: string
+          example: null
+          description: Unique id of the image attachment for this group.
+          deprecated: true
+        created_at:
+          type: integer
+          format: timestamp
+          example: 162857125819
+          description: Creation date of the group.
+        updated_at:
+          type: integer
+          format: timestamp
+          example: 162857125819
+          description: Date, available if the group has been edited.
     coupon:
       type: object
       properties:
