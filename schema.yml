@@ -6,6 +6,7 @@ info:
   description: Sellix public API for developers to access merchant resources
   version: 1.0.0
   title: Sellix Developers API
+  schemaExpansionLevel: all
   x-logo:
     url: https://cdn.sellix.io/static/logo/sellix-logo-black-smaller.png
     backgroundColor: "#FFFFFF"
