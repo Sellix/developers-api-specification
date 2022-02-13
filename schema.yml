@@ -2035,6 +2035,15 @@ components:
             - SUBSCRIPTION
           example: SUBSCRIPTION
           description: Product type.
+        subtype:
+          type: string
+          enum:
+            - SERIALS
+            - FILE
+            - SERVICE
+            - DYNAMIC
+          example: null
+          description: Product subtype, can be used only with type SUBSCRIPTION.
         title:
           type: string
           example: Digital good to download
@@ -2103,6 +2112,14 @@ components:
           type: integer
           example: 0
           description: Defines a trial period before billing the customer for product type SUBSCRIPTION.
+        paypal_product_id:
+          type: string
+          example: null
+          description: When a product SUBSCRIPTION is created and the gateway PAYPAL chosen, a PayPal product is automatically created on the connected account.
+        paypal_plan_id:
+          type: string
+          example: null
+          description: When a product SUBSCRIPTION is created and the gateway PAYPAL chosen, a PayPal plan is automatically created on the connected account.
         stripe_price_id:
           type: string
           example: price_sample2X7rAeMb7AM5APEU
@@ -2723,6 +2740,15 @@ components:
             - SUBSCRIPTION
           example: SERIALS
           description: Product type.
+        subtype:
+          type: string
+          enum:
+            - SERIALS
+            - FILE
+            - SERVICE
+            - DYNAMIC
+          example: null
+          description: Product subtype, set only with product_type SUBSCRIPTION.
         subscription_id:
           type: integer
           example: null
@@ -2775,11 +2801,11 @@ components:
         paypal_subscription_id:
           type: integer
           example: null
-          description: Field reserved for Sellix-own plans. ID of the paypal subscription for internal reference.
+          description: ID of the paypal subscription.
         paypal_subscription_link:
           type: integer
           example: null
-          description: Field reserved for Sellix-own plans. Link for the merchant to purchase the subscription from.
+          description: Link for the merchant to purchase the subscription from.
         lex_order_id:
           type: string
           example: null
@@ -3223,6 +3249,15 @@ components:
             - SUBSCRIPTION
           example: SERIALS
           description: Product type.
+        subtype:
+          type: string
+          enum:
+            - SERIALS
+            - FILE
+            - SERVICE
+            - DYNAMIC
+          example: null
+          description: Product subtype, set only with product_type SUBSCRIPTION.
         gateway:
           type: string
           enum:
